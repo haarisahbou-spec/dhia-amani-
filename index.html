@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Awak ❤️</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
+  color: #fff;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+/* Floating hearts */
+.heart {
+  position: fixed;
+  bottom: -50px;
+  font-size: 20px;
+  animation: floatUp 5s linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+.container {
+  padding: 40px 20px;
+  animation: fadeIn 2s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 10px 0;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  border: none;
+  background: #ff4d6d;
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #ff1e4d;
+  transform: scale(1.05);
+}
+
+.hidden {
+  display: none;
+}
+
+.gallery img {
+  width: 100px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.fade-text {
+  opacity: 0;
+  transition: 2s;
+}
+
+.show {
+  opacity: 1;
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="bgMusic" autoplay loop>
+  <source src="music.mp3" type="audio/mp3">
+</audio>
+
+<div class="container">
+  <h1>Untuk Awak ❤️</h1>
+  <p>Saya ada sesuatu untuk awak...</p>
+
+  <button onclick="start()">Klik sini 💌</button>
+
+  <div id="content" class="hidden">
+
+    <p class="fade-text">Sejak kenal awak...</p>
+    <p class="fade-text">Hidup saya jadi lebih bermakna 💖</p>
+    <p class="fade-text">Terima kasih sebab sentiasa ada...</p>
+
+    <button onclick="showLove()">Ada lagi... 👀</button>
+
+    <div id="loveMsg" class="hidden fade-text">
+      <h2>Saya sayang awak ❤️</h2>
+      <p>Lebih dari apa yang saya boleh explain...</p>
+    </div>
+
+    <h3 style="margin-top:30px;">Kenangan kita 📸</h3>
+    <div class="gallery">
+      <img src="img1.jpg">
+      <img src="img2.jpg">
+      <img src="img3.jpg">
+    </div>
+
+  </div>
+</div>
+
+<script>
+function start() {
+  document.getElementById("content").classList.remove("hidden");
+
+  let texts = document.querySelectorAll(".fade-text");
+  texts.forEach((el, i) => {
+    setTimeout(() => {
+      el.classList.add("show");
+    }, i * 1500);
+  });
+
+  spawnHearts();
+
+  // Fix autoplay restriction
+  document.getElementById("bgMusic").play().catch(() => {
+    console.log("User interaction needed for audio");
+  });
+}
+
+function showLove() {
+  let msg = document.getElementById("loveMsg");
+  msg.classList.remove("hidden");
+  setTimeout(() => msg.classList.add("show"), 100);
+}
+
+function spawnHearts() {
+  setInterval(() => {
+    let heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 5000);
+  }, 300);
+}
+</script>
+
+</body>
+</html>
